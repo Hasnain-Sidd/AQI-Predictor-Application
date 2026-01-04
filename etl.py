@@ -7,7 +7,7 @@ def extract_data(url):
     API_Key=os.getenv('_API_NINJA_KEY_')
     header={"X-Api-Key":API_Key}
     param={'city':'Karachi'}
-    response=requests.get(url,headers=header,param=param)
+    response=requests.get(url,headers=header,params=param)
     data=response.json()
     return data
 
