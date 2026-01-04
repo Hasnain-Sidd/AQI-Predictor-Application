@@ -30,6 +30,6 @@ jobs:
 
       - name: Run ETL Pipeline
         env:
-         _API_NINJA_KEY: ${{ secrets.API_NINJAS_KEY }}
+         _API_NINJA_KEY_: ${{ secrets._API_NINJA_KEY_ }}
         run: |
           python etl.py
