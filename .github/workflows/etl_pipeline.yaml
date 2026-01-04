@@ -29,5 +29,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Run ETL Pipeline
+        env:
+         _API_NINJA_KEY: ${{ secrets.API_NINJAS_KEY }}
         run: |
           python etl.py
