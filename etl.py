@@ -32,4 +32,4 @@ def load_data(data_dict,db_connection):
 
 extract=extract_data('https://api.api-ninjas.com/v1/airquality')
 transformed=transform_data(extract)
-load_data(transformed,"mysql+pymysql://root:Has1234#@localhost/test_db")
+load_data(transformed,"mysql+pymysql://root:Has1234#@localhost:3306/test_db")
