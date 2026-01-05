@@ -19,19 +19,19 @@ def transform_data(data):
      Pm2_5=data['PM2.5']['concentration']
      So2=data['SO2']['concentration']
      Aqi=data['overall_aqi']
-     title=['CO','No2','O3','Pm10','Pm2_5','So2','Aqi']
+     title=['CO','No2','O3','Pm10','Pm2.5','So2','Aqi']
      values=[CO,No2,O3,Pm10,Pm2_5,So2,Aqi]
      aqi_df=pd.DataFrame(dict(zip(title,values)),index=[0])
      return aqi_df.to_dict()
 
-def load_data(data_dict,db_connection):
+def load_data(data_dict):
      df=pd.DataFrame(data_dict)
-     engine=sqlalchemy.create_engine(db_connection)
+     engine=sqlalchemy.create_engine("mysql+pymysql://root:Has1234#@localhost:3306/test_db")
      with engine.connect() as connection:
          df.to_sql("aqi_data",if_exists='append',con=connection,index=False)
 
 
-db_connection = os.getenv('DATABASE_URL')
+
 extract=extract_data('https://api.api-ninjas.com/v1/airquality')
 transformed=transform_data(extract)
-load_data(transformed,db_connection)
+load_data(transformed)
