@@ -25,7 +25,7 @@ jobs:
 
       - name: Run ETL
         env:
-          _API_NINJA_KEY: ${{ secrets._API_NINJA_KEY }}
+          _API_NINJA_KEY_: ${{ secrets._API_NINJA_KEY_ }}
           HOPSWORKS_API_KEY: ${{ secrets.HOPSWORKS_API_KEY }}
         run: |
           python etl.py
