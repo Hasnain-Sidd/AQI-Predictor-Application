@@ -2,14 +2,15 @@ name: AQI ETL Pipeline
 
 on:
   schedule:
-    - cron: "0 * * * *"   # Every 6 hours
+    - cron: "0 */6 * * *"   # Every 6 hours
   push:
     branches: [ main ]
 
 jobs:
   etl:
     runs-on: ubuntu-latest
-  services:
+
+    services:
       mongo:
         image: mongo:6
         ports:
@@ -19,7 +20,8 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-  steps:
+
+    steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
