@@ -29,7 +29,7 @@ def load_data(data_dict):
      client=MongoClient('mongodb://localhost:27017/')
      db=client['aqi_data']
      collection=db['karachi_aqi_etl']
-     collection.insert_many(data_dict)
+     collection.insert_many([data_dict])
      
 
 
