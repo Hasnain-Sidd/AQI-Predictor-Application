@@ -23,13 +23,13 @@ def transform_data(data):
      values=[CO,No2,O3,Pm10,Pm2_5,So2,Aqi]
      aqi_df=pd.DataFrame(dict(zip(title,values)),index=[0])
      aqi_df['time']=pd.Timestamp.now()
-     return aqi_df.to_dict()
+     return aqi_df.to_dict(orient="records")[0]
 
 def load_data(data_dict):
      client=MongoClient('mongodb://localhost:27017/')
      db=client['aqi_data']
      collection=db['karachi_aqi_etl']
-     collection.insert_many([data_dict])
+     collection.insert_one(data_dict)
      
 
 
