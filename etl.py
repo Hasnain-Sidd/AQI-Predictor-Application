@@ -1,7 +1,7 @@
 import pandas as pd 
 import requests
 import os
-import hopsworks
+from pymongo import MongoClient
 
 def extract_data(url):
      API_Key=os.getenv('_API_NINJA_KEY_')
@@ -22,18 +22,15 @@ def transform_data(data):
      title=['co','no2','o3','pm10','pm2_5','so2','aqi']
      values=[CO,No2,O3,Pm10,Pm2_5,So2,Aqi]
      aqi_df=pd.DataFrame(dict(zip(title,values)),index=[0])
+     aqi_df['time']=pd.Timestamp.now()
      return aqi_df.to_dict()
 
 def load_data(data_dict):
-     df=pd.DataFrame(data_dict)
-     project =hopsworks.login()
-     fs=project.get_feature_store()
-     fg = fs.get_or_create_feature_group(
-     name="air_quality_data",
-     version=1,
-     primary_key=["aqi"],
-     description="Air Quality Index data")
-     fg.insert(df)
+     client=MongoClient('mongodb://localhost:27017/')
+     db=client['aqi_data']
+     collection=db['karachi_aqi_etl']
+     collection.insert_many(data_dict)
+     
 
 
 
