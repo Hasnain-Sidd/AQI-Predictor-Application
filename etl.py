@@ -12,6 +12,8 @@ def extract_data(url):
      return data
 
 def transform_data(data):
+      
+     time=pd.Timestamp.now()
      CO=data['CO']['concentration']
      No2=data['NO2']['concentration']
      O3=data['O3']['concentration']
@@ -19,10 +21,11 @@ def transform_data(data):
      Pm2_5=data['PM2.5']['concentration']
      So2=data['SO2']['concentration']
      Aqi=data['overall_aqi']
-     title=['co','no2','o3','pm10','pm2_5','so2','aqi']
-     values=[CO,No2,O3,Pm10,Pm2_5,So2,Aqi]
+     title=['time','co','no2','o3','pm10','pm2_5','so2','aqi']
+     values=[time,CO,No2,O3,Pm10,Pm2_5,So2,Aqi]
+
      aqi_df=pd.DataFrame(dict(zip(title,values)),index=[0])
-     aqi_df['time']=pd.Timestamp.now()
+     
      return aqi_df.to_dict(orient="records")[0]
 
 def load_data(data_dict):
