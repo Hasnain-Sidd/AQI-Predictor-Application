@@ -20,91 +20,122 @@ st.set_page_config(
 # ----------------------------
 # Custom CSS Styling
 # ----------------------------
+# ----------------------------
+# Professional UI Styling (Improved Readability)
+# ----------------------------
 st.markdown("""
     <style>
+
+    /* Main Background */
     .main {
-        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        background-color: #F4F6F9;
     }
-    .stMetric {
-        background: white;
-        padding: 25px;
-        border-radius: 15px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        border-left: 5px solid #2196F3;
-    }
-    .stMetric label {
-        font-size: 16px !important;
-        font-weight: 600 !important;
-        color: #1976D2 !important;
-    }
-    .stMetric [data-testid="stMetricValue"] {
-        font-size: 36px !important;
-        font-weight: 700 !important;
-        color: #0D47A1 !important;
-    }
-    .stMetric [data-testid="stMetricDelta"] {
-        font-size: 14px !important;
-        color: #424242 !important;
-    }
+
+    /* Main Heading */
     h1 {
-        color: #0D47A1;
+        color: #1F3A8A;
         text-align: center;
-        font-size: 48px;
-        font-weight: 800;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
-        margin-bottom: 10px;
+        font-size: 42px;
+        font-weight: 700;
+        margin-bottom: 5px;
     }
+
+    .subtitle {
+        color: #475569;
+        font-size: 17px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    /* Section Headings */
     h2 {
-        color: #1565C0;
+        color: #1E40AF;
         font-weight: 600;
         margin-top: 30px;
     }
+
     h3 {
-        color: #1976D2;
+        color: #1D4ED8;
         font-weight: 600;
     }
+
+    /* Metric Cards */
+    .stMetric {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        border: 1px solid #E5E7EB;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+
+    .stMetric label {
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        color: #334155 !important;
+    }
+
+    .stMetric [data-testid="stMetricValue"] {
+        font-size: 32px !important;
+        font-weight: 700 !important;
+        color: #111827 !important;
+    }
+
+    .stMetric [data-testid="stMetricDelta"] {
+        font-size: 13px !important;
+        color: #64748B !important;
+    }
+
+    /* Status Card */
     .status-card {
         background: white;
         padding: 30px;
-        border-radius: 20px;
-        border: 3px solid #2196F3;
-        box-shadow: 0 6px 20px rgba(33, 150, 243, 0.2);
-        margin: 20px 0;
+        border-radius: 16px;
+        border: 1px solid #E2E8F0;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+        margin: 25px 0;
     }
+
+    /* Info Boxes */
     .info-box {
         background: white;
-        padding: 25px;
-        border-radius: 12px;
-        margin: 15px 0;
-        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
-        border-left: 4px solid #42A5F5;
-    }
-    .aqi-parameter {
-        background: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
         padding: 20px;
-        border-radius: 12px;
+        border-radius: 10px;
+        margin: 15px 0;
+        border: 1px solid #E5E7EB;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    }
+
+    /* AQI Parameter Box */
+    .aqi-parameter {
+        background: #1E40AF;
+        padding: 18px;
+        border-radius: 10px;
         margin: 10px 0;
         color: white;
-        font-weight: 600;
-        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        font-weight: 500;
     }
+
+    /* Plot Container */
     .stPlotlyChart {
         background: white;
-        border-radius: 15px;
+        border-radius: 12px;
+        padding: 15px;
+        border: 1px solid #E5E7EB;
+        box-shadow: 0 3px 8px rgba(0,0,0,0.05);
+    }
+
+    /* Footer */
+    .footer-box {
+        background: white;
+        border-radius: 10px;
         padding: 20px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border: 1px solid #E5E7EB;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.05);
     }
-    p {
-        color: #424242;
-    }
-    .subtitle {
-        color: #1976D2;
-        font-size: 18px;
-        text-align: center;
-        margin-bottom: 30px;
-    }
+
     </style>
 """, unsafe_allow_html=True)
+
 
 # ----------------------------
 # Load MLflow model (always fetch latest)
