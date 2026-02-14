@@ -23,70 +23,85 @@ st.set_page_config(
 st.markdown("""
     <style>
     .main {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
     }
     .stMetric {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        padding: 20px;
+        background: white;
+        padding: 25px;
         border-radius: 15px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-left: 5px solid #2196F3;
     }
     .stMetric label {
-        font-size: 18px !important;
+        font-size: 16px !important;
         font-weight: 600 !important;
-        color: #ffffff !important;
+        color: #1976D2 !important;
     }
     .stMetric [data-testid="stMetricValue"] {
         font-size: 36px !important;
         font-weight: 700 !important;
-        color: #ffffff !important;
+        color: #0D47A1 !important;
+    }
+    .stMetric [data-testid="stMetricDelta"] {
+        font-size: 14px !important;
+        color: #424242 !important;
     }
     h1 {
-        color: #ffffff;
+        color: #0D47A1;
         text-align: center;
         font-size: 48px;
         font-weight: 800;
-        text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         margin-bottom: 10px;
     }
     h2 {
-        color: #ffffff;
+        color: #1565C0;
         font-weight: 600;
-        text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        margin-top: 30px;
     }
     h3 {
-        color: #ffffff;
+        color: #1976D2;
         font-weight: 600;
     }
     .status-card {
-        background: rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        padding: 25px;
-        border-radius: 15px;
-        border: 2px solid rgba(255, 255, 255, 0.2);
-        box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+        background: white;
+        padding: 30px;
+        border-radius: 20px;
+        border: 3px solid #2196F3;
+        box-shadow: 0 6px 20px rgba(33, 150, 243, 0.2);
         margin: 20px 0;
     }
     .info-box {
-        background: rgba(255, 255, 255, 0.95);
-        padding: 20px;
-        border-radius: 10px;
-        margin: 10px 0;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        margin: 15px 0;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+        border-left: 4px solid #42A5F5;
     }
     .aqi-parameter {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        padding: 15px;
-        border-radius: 10px;
+        background: linear-gradient(135deg, #42A5F5 0%, #1E88E5 100%);
+        padding: 20px;
+        border-radius: 12px;
         margin: 10px 0;
         color: white;
         font-weight: 600;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.15);
     }
     .stPlotlyChart {
-        background: rgba(255, 255, 255, 0.05);
+        background: white;
         border-radius: 15px;
         padding: 20px;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    p {
+        color: #424242;
+    }
+    .subtitle {
+        color: #1976D2;
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 30px;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -170,7 +185,7 @@ d3 = today + timedelta(days=3)
 # Header Section
 # ----------------------------
 st.markdown("<h1>🌍 Karachi AQI Prediction</h1>", unsafe_allow_html=True)
-st.markdown("<p style='text-align: center; color: white; font-size: 18px; margin-bottom: 30px;'>Real-time Air Quality Index Forecasting for Karachi, Pakistan</p>", unsafe_allow_html=True)
+st.markdown("<p class='subtitle'>Real-time Air Quality Index Forecasting for Karachi, Pakistan</p>", unsafe_allow_html=True)
 
 # ----------------------------
 # Display 3-Day AQI Forecast
@@ -221,10 +236,10 @@ status, color, emoji = aqi_status(day1)
 # ----------------------------
 st.markdown(f"""
     <div class='status-card'>
-        <h2 style='text-align: center; margin-bottom: 20px;'>Current Air Quality Status</h2>
+        <h2 style='text-align: center; margin-bottom: 20px; color: #1565C0;'>Current Air Quality Status</h2>
         <div style='text-align: center; font-size: 72px;'>{emoji}</div>
         <h1 style='color: {color}; text-align: center; font-size: 48px; margin: 20px 0;'>{status}</h1>
-        <p style='text-align: center; color: white; font-size: 24px;'>AQI: {day1}</p>
+        <p style='text-align: center; color: #424242; font-size: 24px; font-weight: 600;'>AQI: {day1}</p>
     </div>
 """, unsafe_allow_html=True)
 
@@ -289,9 +304,9 @@ fig.add_trace(go.Scatter(
     y=history['aqi'],
     mode='lines',
     name='Historical AQI',
-    line=dict(color='#667eea', width=3),
+    line=dict(color='#1976D2', width=3),
     fill='tozeroy',
-    fillcolor='rgba(102, 126, 234, 0.2)'
+    fillcolor='rgba(25, 118, 210, 0.1)'
 ))
 
 # Forecast data
@@ -300,18 +315,18 @@ fig.add_trace(go.Scatter(
     y=future_aqi,
     mode='lines+markers',
     name='Predicted AQI',
-    line=dict(color='#f5576c', width=4, dash='dash'),
-    marker=dict(size=12, color='#f5576c', symbol='diamond')
+    line=dict(color='#F57C00', width=4, dash='dash'),
+    marker=dict(size=12, color='#F57C00', symbol='diamond')
 ))
 
 # Add AQI threshold lines
-fig.add_hline(y=50, line_dash="dot", line_color="green", opacity=0.5, 
+fig.add_hline(y=50, line_dash="dot", line_color="#4CAF50", opacity=0.6, 
               annotation_text="Good", annotation_position="right")
-fig.add_hline(y=100, line_dash="dot", line_color="yellow", opacity=0.5, 
+fig.add_hline(y=100, line_dash="dot", line_color="#FFEB3B", opacity=0.6, 
               annotation_text="Moderate", annotation_position="right")
-fig.add_hline(y=150, line_dash="dot", line_color="orange", opacity=0.5, 
+fig.add_hline(y=150, line_dash="dot", line_color="#FF9800", opacity=0.6, 
               annotation_text="Unhealthy for Sensitive", annotation_position="right")
-fig.add_hline(y=200, line_dash="dot", line_color="red", opacity=0.5, 
+fig.add_hline(y=200, line_dash="dot", line_color="#F44336", opacity=0.6, 
               annotation_text="Unhealthy", annotation_position="right")
 
 fig.update_layout(
@@ -319,17 +334,17 @@ fig.update_layout(
         'text': "Air Quality Index: Historical Data & 3-Day Forecast",
         'x': 0.5,
         'xanchor': 'center',
-        'font': {'size': 20, 'color': 'white', 'family': 'Arial Black'}
+        'font': {'size': 20, 'color': '#0D47A1', 'family': 'Arial'}
     },
     xaxis_title="Date & Time",
     yaxis_title="AQI Value",
-    template="plotly_dark",
+    template="plotly_white",
     hovermode='x unified',
-    plot_bgcolor='rgba(0,0,0,0)',
-    paper_bgcolor='rgba(0,0,0,0)',
-    font=dict(color='white', size=12),
-    xaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
-    yaxis=dict(showgrid=True, gridcolor='rgba(255,255,255,0.1)'),
+    plot_bgcolor='#F5F5F5',
+    paper_bgcolor='white',
+    font=dict(color='#424242', size=12),
+    xaxis=dict(showgrid=True, gridcolor='#E0E0E0'),
+    yaxis=dict(showgrid=True, gridcolor='#E0E0E0'),
     height=500
 )
 
@@ -339,9 +354,9 @@ st.plotly_chart(fig, use_container_width=True)
 # Footer
 # ----------------------------
 st.markdown(f"""
-    <div style='text-align: center; margin-top: 50px; padding: 20px; color: white; opacity: 0.8;'>
-        <p>Data updated in real-time from Karachi air quality monitoring stations</p>
-        <p style='font-size: 12px;'>Powered by Machine Learning (Model v{model_version}) | US EPA AQI Standards</p>
-        <p style='font-size: 10px; margin-top: 10px;'>Model trained daily • Data refreshed every 5 minutes</p>
+    <div style='text-align: center; margin-top: 50px; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);'>
+        <p style='color: #424242; font-weight: 500;'>Data updated in real-time from Karachi air quality monitoring stations</p>
+        <p style='font-size: 12px; color: #757575;'>Powered by Machine Learning (Model v{model_version}) | US EPA AQI Standards</p>
+        <p style='font-size: 10px; margin-top: 10px; color: #9E9E9E;'>Model trained daily • Data refreshed every 5 minutes</p>
     </div>
 """, unsafe_allow_html=True)
