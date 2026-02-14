@@ -113,18 +113,23 @@ def evaluate_model(model, X_test, y_test):
 
 def register_model(model, mse, mae, r2, param_grid):
 
-    os.environ["DAGSHUB_REPO_TOKEN"] = os.getenv("DAGSHUB_REPO_TOKEN")
-
-
-    mlflow.set_tracking_uri(
-        "https://dagshub.com/hasnainhissam56/AQI_Predictor_Models.mlflow"
-    )
-
-    dagshub.init(
-        repo_owner="hasnainhissam56",
-        repo_name="AQI_Predictor_Models",
-        mlflow=True
-    )
+    """
+    Register model to DagsHub MLflow using token authentication
+    """
+    
+    # Get the DagsHub token from environment
+    dagshub_token = os.getenv("DAGSHUB_REPO_TOKEN")
+    
+    if not dagshub_token:
+        raise ValueError("DAGSHUB_REPO_TOKEN environment variable is not set")
+    
+    # Set MLflow tracking URI with authentication
+    mlflow_tracking_uri = "https://dagshub.com/hasnainhissam56/AQI_Predictor_Models.mlflow"
+    mlflow.set_tracking_uri(mlflow_tracking_uri)
+    
+    # Set authentication using environment variables (MLflow will use these)
+    os.environ["MLFLOW_TRACKING_USERNAME"] = dagshub_token
+    os.environ["MLFLOW_TRACKING_PASSWORD"] = dagshub_token
 
     with mlflow.start_run() as run:
 
