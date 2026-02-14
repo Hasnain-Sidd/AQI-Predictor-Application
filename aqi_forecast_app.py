@@ -4,8 +4,8 @@ from pymongo import MongoClient
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 import mlflow
-import dagshub
 from mlflow.tracking import MlflowClient
+import os
 
 # ----------------------------
 # Page Configuration
@@ -94,14 +94,14 @@ st.markdown("""
 # ----------------------------
 # Load MLflow model (always fetch latest)
 # ----------------------------
+import os
+
+# Set DagHub credentials from Streamlit secrets
+os.environ['MLFLOW_TRACKING_USERNAME'] = st.secrets.get("DAGSHUB_USERNAME", "hasnainhissam56")
+os.environ['MLFLOW_TRACKING_PASSWORD'] = st.secrets.get("DAGSHUB_TOKEN", "")
+
 mlflow.set_tracking_uri(
     "https://dagshub.com/hasnainhissam56/AQI_Predictor_Models.mlflow"
-)
-
-dagshub.init(
-    repo_owner="hasnainhissam56",
-    repo_name="AQI_Predictor_Models",
-    mlflow=True
 )
 
 @st.cache_resource(ttl=21600)  # Cache model for 6 hours, reloads 4 times daily to catch new versions
