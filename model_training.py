@@ -113,6 +113,9 @@ def evaluate_model(model, X_test, y_test):
 
 def register_model(model, mse, mae, r2, param_grid):
 
+    os.environ["DAGSHUB_REPO_TOKEN"] = os.getenv("DAGSHUB_REPO_TOKEN")
+
+
     mlflow.set_tracking_uri(
         "https://dagshub.com/hasnainhissam56/AQI_Predictor_Models.mlflow"
     )
