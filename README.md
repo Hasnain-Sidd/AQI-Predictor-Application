@@ -5,6 +5,10 @@ An end-to-end production-ready MLOps pipeline that collects, stores, forecasts, 
 This project implements automated data ingestion, cloud storage, model training with hyperparameter tuning, MLflow model registry integration, CI/CD automation, and an interactive forecasting dashboard.
 
 ---
+## 🚀 Live Demo
+
+🔗 https://aqi-forecast-7krbn3hkzzwdfweq3m4ghy.streamlit.app/
+
 
 ## Table of Contents
 
